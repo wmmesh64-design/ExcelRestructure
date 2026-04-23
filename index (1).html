@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Excel Restructure Tool</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="grid-bg"></div>
+
+  <main>
+    <header>
+      <div class="logo-mark">XR</div>
+      <div class="header-text">
+        <h1>Excel Restructure</h1>
+        <p>حوّل أعمدة النوع والمعرّف إلى هيكل منظم</p>
+      </div>
+    </header>
+
+    <!-- Step 1: Upload -->
+    <section class="card" id="uploadCard">
+      <div class="step-label">01 — رفع الملف</div>
+      <div class="drop-zone" id="dropZone">
+        <div class="drop-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="17 8 12 3 7 8"/>
+            <line x1="12" y1="3" x2="12" y2="15"/>
+          </svg>
+        </div>
+        <div class="drop-text">اسحب الملف هنا أو <span class="link" onclick="document.getElementById('fileInput').click()">اختر من جهازك</span></div>
+        <div class="drop-sub">xlsx · xls · csv</div>
+        <input type="file" id="fileInput" accept=".xlsx,.xls,.csv" />
+      </div>
+      <div class="file-info" id="fileInfo" style="display:none">
+        <div class="file-name" id="fileName"></div>
+        <div class="file-rows" id="fileRows"></div>
+      </div>
+    </section>
+
+    <!-- Step 2: Configure -->
+    <section class="card disabled" id="configCard">
+      <div class="step-label">02 — إعداد الأعمدة</div>
+      <div class="config-row">
+        <div class="config-field">
+          <label>عمود النوع (Type)</label>
+          <select id="typeCol" disabled></select>
+        </div>
+        <div class="arrow">→</div>
+        <div class="config-field">
+          <label>عمود المعرّف (ID)</label>
+          <select id="idCol" disabled></select>
+        </div>
+      </div>
+      <div class="types-preview" id="typesPreview"></div>
+    </section>
+
+    <!-- Step 3: Preview -->
+    <section class="card disabled" id="previewCard">
+      <div class="step-label">03 — معاينة البيانات</div>
+      <div class="table-wrap" id="tableWrap"></div>
+    </section>
+
+    <!-- Action -->
+    <div class="action-row">
+      <button class="btn-export" id="exportBtn" disabled onclick="processData()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        تحميل الملف المُعاد هيكلته
+      </button>
+      <div class="status-msg" id="statusMsg"></div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
